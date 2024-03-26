@@ -1,6 +1,6 @@
 "useClient";
-import Header from "./Components/Common/Header";
-import MainMenu from "./Components/Common/MainMenu";
+import Header from "./Components/Common/header/Header";
+import MainMenu from "./Components/Common/mainMenu/MainMenu";
 
 export default function Home() {
   return (
