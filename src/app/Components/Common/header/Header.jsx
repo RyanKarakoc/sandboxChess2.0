@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import headerBackground from "../../../../public/SandboxChessImage.png";
+import headerBackground from "../../../../../public/SandboxChessImage.png";
+const styles = require("./style");
+const header = styles.header();
 
 const Header = () => {
+  console.log(header);
   return (
-    <div className="flex flex-col items-center mt-10 mb-20">
+    <div className={header}>
       <Link href="/">
         <Image src={headerBackground} alt="Sandbox Chess" />
       </Link>
