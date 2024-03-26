@@ -13,10 +13,6 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
-    header: {
-      layout: "flex flex-col items-center",
-      spacing: "mt-10 mb-20",
-    },
   },
   plugins: [],
 };
