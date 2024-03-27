@@ -5,7 +5,6 @@ const styles = require("./style");
 const header = styles.header();
 
 const Header = () => {
-  console.log(header);
   return (
     <div className={header}>
       <Link href="/">

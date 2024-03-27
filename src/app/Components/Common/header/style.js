@@ -1,3 +1,5 @@
+const styleString = require("../../../../../utils/styleString");
+
 const headerStyle = {
   display: "flex",
   flexDirection: "flex-col",
@@ -7,11 +9,7 @@ const headerStyle = {
 };
 
 const header = () => {
-  let string = "";
-  for (const key in headerStyle) {
-    string += `${headerStyle[key]} `;
-  }
-  return string;
+  return styleString(headerStyle);
 };
 
 module.exports = { header };
