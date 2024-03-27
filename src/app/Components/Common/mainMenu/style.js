@@ -1,4 +1,6 @@
-const navStyle = {
+const styleString = require("../../../../../utils/styleString");
+
+const navContainerStyle = {
   display: "flex",
   flexDirection: "flex-col",
   alignItems: "items-center",
@@ -15,19 +17,11 @@ const buttonStyle = {
 };
 
 const navContainer = () => {
-  let string = "";
-  for (const key in navStyle) {
-    string += `${navStyle[key]} `;
-  }
-  return string;
+  return styleString(navContainerStyle);
 };
 
 const buttons = () => {
-  let string = "";
-  for (const key in buttonStyle) {
-    string += `${buttonStyle[key]} `;
-  }
-  return string;
+  return styleString(buttonStyle);
 };
 
 module.exports = { navContainer, buttons };
