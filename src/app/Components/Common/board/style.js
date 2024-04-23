@@ -92,6 +92,21 @@ const columnText = (rowIndex, colIndex) => {
   return styleString(columnTextStyle) + textColour(rowIndex, colIndex);
 };
 
+const pieceStyle = {
+  position: "absolute",
+  inset: "inset-0",
+  display: "flex",
+  alignItems: "items-center",
+  justifyItems: "justify-center",
+  width: "w-fit",
+  select: "select-none",
+  cursor: "cursor-grabbing",
+};
+
+const piece = () => {
+  return styleString(pieceStyle);
+};
+
 module.exports = {
   piecePlacement,
   boardContainer,
@@ -101,4 +116,5 @@ module.exports = {
   tile,
   rowText,
   columnText,
+  piece,
 };

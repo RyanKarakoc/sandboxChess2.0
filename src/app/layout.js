@@ -1,5 +1,6 @@
 import { Inter, Days_One } from "next/font/google";
 import "./globals.css";
+import { GlobalStateProvider } from "./Components/Common/context/GlobabStateProvider";
 
 const daysOne = Days_One({ subsets: ["latin"], weight: "400" });
 const inter = Inter({ subsets: ["latin"] });
@@ -11,8 +12,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${daysOne.className} bg-amber-100`}>{children}</body>
-    </html>
+    <GlobalStateProvider>
+      <html lang="en">
+        <body className={`${daysOne.className} bg-amber-100`}>{children}</body>
+      </html>
+    </GlobalStateProvider>
   );
 }
