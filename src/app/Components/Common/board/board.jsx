@@ -25,6 +25,7 @@ import BlackRook from "../pieces/rook/BlackRook";
 import WhiteRook from "../pieces/rook/WhiteRook";
 import { pieceMovement } from "../../../../../utils/pieces/pieceMovement";
 import initialBoard from "../../../../../utils/board/initialBoard";
+import { boardUpdate } from "../../../../../utils/board/boardUpdate";
 
 const Piece = ({ tile }) => {
   const renderPiece = () => {
@@ -68,6 +69,7 @@ const Board = () => {
     setStartTile,
     endTile,
     setEndTile,
+    moveNumber,
     setMoveNumber,
     colourToMove,
   } = useGlobalState();
@@ -88,7 +90,16 @@ const Board = () => {
           colourToMove
         )
       ) {
-        // boardUpdate
+        const newBoard = boardUpdate(
+          startTile,
+          endTile,
+          currentBoardState,
+          movingPiece
+        );
+        newBoard.reverse();
+        setBoardState(newBoard);
+        setMoveNumber((prevNumber) => prevNumber + 1);
+        console.log(moveNumber);
       }
     }
   }, [endTile]);
