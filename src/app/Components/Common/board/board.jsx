@@ -105,8 +105,6 @@ const Board = () => {
     }
   }, [playMove]);
 
-  console.log(moveNumber);
-
   return (
     <div className={styles.boardContainer()}>
       <div className={styles.boardPadding()}>
