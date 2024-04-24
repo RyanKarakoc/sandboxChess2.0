@@ -89,6 +89,26 @@ describe("pawnMovement", () => {
       // assert
       expect(result).toBe(false);
     });
+    test("returns false when blocked by a piece", () => {
+      // arrange
+      const startTile = { piece: whitePieces.pawn, row: 4, column: "a" };
+      const endTile = { piece: whitePieces.pawn, row: 5, column: "a" };
+      const currentBoardState = [...initialBoard];
+      currentBoardState[1][0].piece = "";
+      currentBoardState[3][0].piece = whitePieces.pawn;
+      currentBoardState[6][0].piece = "";
+      currentBoardState[4][0].piece = blackPieces.pawn;
+      const colourToMove = "white";
+      // act
+      const result = pawnMovement(
+        startTile,
+        endTile,
+        currentBoardState,
+        colourToMove
+      );
+      // assert
+      expect(result).toBe(false);
+    });
   });
   describe("black pawn", () => {
     test("returns true when moving 2 tiles from starting position", () => {
