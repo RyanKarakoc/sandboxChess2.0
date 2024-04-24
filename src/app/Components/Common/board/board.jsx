@@ -76,10 +76,12 @@ const Board = () => {
   const [boardState, setBoardState] = useState(initialBoardState);
   const [movingPiece, setMovingPiece] = useState("");
 
+  const [playMove, setPlayMove] = useState(false);
+
   // once endtile has been setup we can now check the movement
   useEffect(() => {
+    setPlayMove(false);
     if (endTile) {
-      console.log(boardState);
       const currentBoardState = [...boardState].reverse();
       if (
         pieceMovement(
@@ -99,10 +101,11 @@ const Board = () => {
         newBoard.reverse();
         setBoardState(newBoard);
         setMoveNumber((prevNumber) => prevNumber + 1);
-        console.log(moveNumber);
       }
     }
-  }, [endTile]);
+  }, [playMove]);
+
+  console.log(moveNumber);
 
   return (
     <div className={styles.boardContainer()}>
@@ -120,7 +123,7 @@ const Board = () => {
                   onDragStart={(e) => boardDragStart(e, setMovingPiece, tile)}
                   onDrag={(e) => boardDrag()}
                   onDragOver={(e) => boardDragOver(e)}
-                  onDrop={(e) => boardDrop(e, setEndTile, tile)}
+                  onDrop={(e) => boardDrop(e, setEndTile, tile, setPlayMove)}
                 >
                   {/* Display Pieces */}
                   {tile && <Piece type={tile.piece} tile={tile} />}
