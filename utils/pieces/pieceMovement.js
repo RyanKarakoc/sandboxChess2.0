@@ -2,6 +2,7 @@ const { whitePieces } = require("./whitePieces");
 const { blackPieces } = require("./blackPieces");
 const { pawnMovement } = require("./pawn/pawnMovement");
 const { rookMovement } = require("./rook/rookMovement");
+const { knightMovement } = require("./knight/knightMovement");
 
 const pieceMovement = (
   startTile,
@@ -24,6 +25,12 @@ const pieceMovement = (
         return true;
       }
     }
+    // if the moving piece is a knight run knight movement
+    if (movingPiece === whitePieces.knight) {
+      if (knightMovement(startTile, endTile, currentBoardState, colourToMove)) {
+        return true;
+      }
+    }
   }
 
   // if colour to move is white look for black pieces
@@ -37,6 +44,12 @@ const pieceMovement = (
     // if the moving piece is a rook run rook movement
     if (movingPiece === blackPieces.rook) {
       if (rookMovement(startTile, endTile, currentBoardState, colourToMove)) {
+        return true;
+      }
+    }
+    // if the moving piece is a knight run knight movement
+    if (movingPiece === blackPieces.knight) {
+      if (knightMovement(startTile, endTile, currentBoardState, colourToMove)) {
         return true;
       }
     }
