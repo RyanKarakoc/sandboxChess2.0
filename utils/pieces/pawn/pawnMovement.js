@@ -13,16 +13,16 @@ const pawnMovement = (startTile, endTile, currentBoardState, colourToMove) => {
   const pawnMoves =
     colourToMove === "white"
       ? [
-          { x: 0, y: 2 },
-          { x: 0, y: 1 },
-          { x: -1, y: 1 },
-          { x: 1, y: 1 },
+          { x: 0, y: 2 }, // white pawn moves 2 tiles from start
+          { x: 0, y: 1 }, // white pawn moves 1 tile from start
+          { x: -1, y: 1 }, // white pawn captures black pawn xNeg
+          { x: 1, y: 1 }, // white pawn captures black pawn xPos
         ]
       : [
-          { x: 0, y: -2 },
-          { x: 0, y: -1 },
-          { x: -1, y: -1 },
-          { x: 1, y: -1 },
+          { x: 0, y: -2 }, // black pawn moves 2 tiles from start
+          { x: 0, y: -1 }, // black pawn moves 1 tile from start
+          { x: -1, y: -1 }, // black pawn captures white pawn xNeg
+          { x: 1, y: -1 }, // black pawn captures white pawn xPos
         ];
 
   // check scope is clear
