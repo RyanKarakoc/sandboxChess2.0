@@ -1,9 +1,9 @@
+const { boardOffset } = require("../boardOffset");
 const { columnRef } = require("../columnRef");
 const { directionMoved } = require("./directionMoved");
 const { numberOfTilesMoved } = require("./numberOfTilesMoved");
 
 const movingScope = (startTile, endTile, currentBoardState) => {
-  const boardOffset = 1;
   const boardColumnStart = columnRef.indexOf(startTile.column);
   const boardRowStart = startTile.row - boardOffset;
 

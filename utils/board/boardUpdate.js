@@ -1,9 +1,8 @@
+const { boardOffset } = require("../boardOffset");
 const { columnRef } = require("../columnRef");
 
 const boardUpdate = (startTile, endTile, currentBoardState, movingPiece) => {
   const newBoard = [...currentBoardState];
-
-  const boardOffset = 1;
 
   const boardColumnStart = columnRef.indexOf(startTile.column);
   const boardRowStart = startTile.row - boardOffset;
