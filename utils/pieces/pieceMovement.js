@@ -1,8 +1,19 @@
-const { whitePieces } = require("./whitePieces");
-const { blackPieces } = require("./blackPieces");
 const { pawnMovement } = require("./pawn/pawnMovement");
 const { rookMovement } = require("./rook/rookMovement");
 const { knightMovement } = require("./knight/knightMovement");
+
+const pieceMovements = {
+  white: {
+    "♙": pawnMovement,
+    "♖": rookMovement,
+    "♘": knightMovement,
+  },
+  black: {
+    "♟︎": pawnMovement,
+    "♜": rookMovement,
+    "♞": knightMovement,
+  },
+};
 
 const pieceMovement = (
   startTile,
@@ -11,49 +22,17 @@ const pieceMovement = (
   movingPiece,
   colourToMove
 ) => {
-  // if colour to move is white look for white pieces
-  if (colourToMove === "white") {
-    // if the moving piece is a pawn run pawn movement
-    if (movingPiece === whitePieces.pawn) {
-      if (pawnMovement(startTile, endTile, currentBoardState, colourToMove)) {
-        return true;
-      }
-    }
-    // if the moving piece is a rook run rook movement
-    if (movingPiece === whitePieces.rook) {
-      if (rookMovement(startTile, endTile, currentBoardState, colourToMove)) {
-        return true;
-      }
-    }
-    // if the moving piece is a knight run knight movement
-    if (movingPiece === whitePieces.knight) {
-      if (knightMovement(startTile, endTile, currentBoardState, colourToMove)) {
-        return true;
-      }
-    }
+  const movements = pieceMovements[colourToMove];
+  if (!movements || !movements[movingPiece]) {
+    return false; // Handle invalid color or piece type
   }
 
-  // if colour to move is white look for black pieces
-  if (colourToMove === "black") {
-    // if the moving piece is a pawn run pawn movement
-    if (movingPiece === blackPieces.pawn) {
-      if (pawnMovement(startTile, endTile, currentBoardState, colourToMove)) {
-        return true;
-      }
-    }
-    // if the moving piece is a rook run rook movement
-    if (movingPiece === blackPieces.rook) {
-      if (rookMovement(startTile, endTile, currentBoardState, colourToMove)) {
-        return true;
-      }
-    }
-    // if the moving piece is a knight run knight movement
-    if (movingPiece === blackPieces.knight) {
-      if (knightMovement(startTile, endTile, currentBoardState, colourToMove)) {
-        return true;
-      }
-    }
-  }
+  return movements[movingPiece](
+    startTile,
+    endTile,
+    currentBoardState,
+    colourToMove
+  );
 };
 
 module.exports = { pieceMovement };
