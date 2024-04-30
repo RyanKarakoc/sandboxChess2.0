@@ -3,6 +3,7 @@ const { rookMovement } = require("./rook/rookMovement");
 const { knightMovement } = require("./knight/knightMovement");
 const { bishopMovement } = require("./bishop/bishopMovement");
 const { queenMovement } = require("./queen/queenMovement");
+const { kingMovement } = require("./king/kingMovement");
 
 const pieceMovements = {
   white: {
@@ -11,6 +12,7 @@ const pieceMovements = {
     "♘": knightMovement,
     "♗": bishopMovement,
     "♕": queenMovement,
+    "♔": kingMovement,
   },
   black: {
     "♟︎": pawnMovement,
@@ -18,6 +20,7 @@ const pieceMovements = {
     "♞": knightMovement,
     "♝": bishopMovement,
     "♛": queenMovement,
+    "♚": kingMovement,
   },
 };
 
