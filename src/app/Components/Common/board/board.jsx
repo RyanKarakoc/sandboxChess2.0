@@ -26,6 +26,7 @@ import WhiteRook from "../pieces/rook/WhiteRook";
 import { pieceMovement } from "../../../../../utils/pieces/pieceMovement";
 import initialBoard from "../../../../../utils/board/initialBoard";
 import { boardUpdate } from "../../../../../utils/board/boardUpdate";
+import { playSound } from "../../../../../utils/playSound";
 
 const Piece = ({ tile }) => {
   const renderPiece = () => {
@@ -100,6 +101,7 @@ const Board = () => {
         );
         newBoard.reverse();
         setBoardState(newBoard);
+        playSound();
         setMoveNumber((prevNumber) => prevNumber + 1);
       }
     }
