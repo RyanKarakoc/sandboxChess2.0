@@ -21,7 +21,6 @@ const bishopMovement = (
   const moveBlocked = isMoveBlocked(tilesMovingOver, colourToMove);
   // the number of tiles bishop has moved
   const tilesMoved = numberOfTilesMoved(startTile, endTile);
-  console.log(tilesMoved);
 
   // loop through the possible moves for bishop
   for (const move of bishopMoves) {
