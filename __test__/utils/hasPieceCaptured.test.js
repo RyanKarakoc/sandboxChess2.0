@@ -1,6 +1,6 @@
 const initialBoard = require("../../utils/board/initialBoard");
 const { blackPieces } = require("../../utils/pieces/blackPieces");
-const { hasPieceCaptured } = require("../../utils/pieces/captured");
+const { hasPieceCaptured } = require("../../utils/pieces/hasPieceCaptured");
 const { whitePieces } = require("../../utils/pieces/whitePieces");
 
 describe("hasPieceCaptured", () => {
