@@ -36,6 +36,11 @@ const pieceMovement = (
     return false; // Handle invalid color or piece type
   }
 
+  // if the piece is selected but not moved
+  if (startTile === endTile) {
+    return false;
+  }
+
   return movements[movingPiece](
     startTile,
     endTile,
