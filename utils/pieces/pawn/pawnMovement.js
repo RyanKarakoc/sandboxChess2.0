@@ -14,13 +14,13 @@ const pawnMovement = (startTile, endTile, currentBoardState, colourToMove) => {
     colourToMove === "white"
       ? [
           { x: 0, y: 2 }, // white pawn moves 2 tiles from start
-          { x: 0, y: 1 }, // white pawn moves 1 tile from start
+          { x: 0, y: 1 }, // white pawn moves 1 tile
           { x: -1, y: 1 }, // white pawn captures black pawn xNeg
           { x: 1, y: 1 }, // white pawn captures black pawn xPos
         ]
       : [
           { x: 0, y: -2 }, // black pawn moves 2 tiles from start
-          { x: 0, y: -1 }, // black pawn moves 1 tile from start
+          { x: 0, y: -1 }, // black pawn moves 1 tile
           { x: -1, y: -1 }, // black pawn captures white pawn xNeg
           { x: 1, y: -1 }, // black pawn captures white pawn xPos
         ];
@@ -35,10 +35,19 @@ const pawnMovement = (startTile, endTile, currentBoardState, colourToMove) => {
 
   // loop through the possible moves for pawn
   for (const move of pawnMoves) {
+    const yPosTwo =
+      (move.x === 0 && move.y === 2) || (move.x === 0 && move.y === -2);
+    const yPos =
+      (move.x === 0 && move.y === 1) || (move.x === 0 && move.y === -1);
+    const xNegYPos = move.x === -1 && move.y === 1;
+    const xNegYNeg = move.x === -1 && move.y === -1;
+    const xPosYPos = move.x === 1 && move.y === 1;
+    const xPosYNeg = move.x === 1 && move.y === -1;
+
     // if the move is not blocked
     if (!moveBlocked) {
       // check start and end tiles match with moving 2 tile from the start
-      if (move.x === 0 && (move.y === 2 || move.y === -2)) {
+      if (yPosTwo) {
         // check if moves match and nothing is blocking forward movement
         if (
           move.x === xTilesMoved &&
@@ -50,7 +59,7 @@ const pawnMovement = (startTile, endTile, currentBoardState, colourToMove) => {
         }
       }
       // check start and end tiles match with moving 1 tile
-      if (move.x === 0 && (move.y === 1 || move.y === -1)) {
+      if (yPos) {
         // check if moves match and nothing is blocking forward movement
         if (
           move.x === xTilesMoved &&
@@ -61,14 +70,22 @@ const pawnMovement = (startTile, endTile, currentBoardState, colourToMove) => {
         }
       }
       // check start and end tiles match with capturing xNeg
-      if (move.x === -1 && (move.y === 1 || move.y === -1)) {
-        if (move.x === xTilesMoved && move.y === yTilesMoved) {
+      if (xNegYPos || xNegYNeg) {
+        if (
+          move.x === xTilesMoved &&
+          move.y === yTilesMoved &&
+          blockedFromMovingForward
+        ) {
           return true;
         }
       }
       // check start and end tiles match with capturing xPos
-      if (move.x === 1 && (move.y === 1 || move.y === -1)) {
-        if (move.x === xTilesMoved && move.y === yTilesMoved) {
+      if (xPosYPos || xPosYNeg) {
+        if (
+          move.x === xTilesMoved &&
+          move.y === yTilesMoved &&
+          blockedFromMovingForward
+        ) {
           return true;
         }
       }
