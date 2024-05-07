@@ -31,9 +31,12 @@ const pieceMovement = (
   movingPiece,
   colourToMove
 ) => {
+  // movement variable for the piece selected
   const movements = pieceMovements[colourToMove];
+
+  // Handle invalid colour or piece type
   if (!movements || !movements[movingPiece]) {
-    return false; // Handle invalid color or piece type
+    return false;
   }
 
   // if the piece is selected but not moved
