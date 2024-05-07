@@ -1,15 +1,3 @@
-const styleString = require("../../../../../utils/styleString");
-
-const headerStyle = {
-  display: "flex",
-  flexDirection: "flex-col",
-  alignItems: "items-center",
-  marginTop: "mt-10",
-  marginBot: "mb-20",
-};
-
-const header = () => {
-  return styleString(headerStyle);
-};
+const header = "flex flex-col items-center mt-10 mb-20";
 
 module.exports = { header };
