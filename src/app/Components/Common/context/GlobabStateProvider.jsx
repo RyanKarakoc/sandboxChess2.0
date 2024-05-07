@@ -9,6 +9,7 @@ export const GlobalStateProvider = ({ children }) => {
   const [startTile, setStartTile] = useState({});
   const [endTile, setEndTile] = useState({});
   const [moveNumber, setMoveNumber] = useState(0);
+  const [moves, setMoves] = useState([]);
 
   const colourToMove = moveNumber % 2 === 0 ? "white" : "black";
 
@@ -22,6 +23,8 @@ export const GlobalStateProvider = ({ children }) => {
         moveNumber,
         setMoveNumber,
         colourToMove,
+        moves,
+        setMoves,
       }}
     >
       {children}

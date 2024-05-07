@@ -1,1 +1,1 @@
-const styleString = require("../../../../../utils/styleString");
+const styleString = require("../../../../../utils/style/styleString");
