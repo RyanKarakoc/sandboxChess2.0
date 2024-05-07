@@ -103,27 +103,7 @@ const Board = () => {
           currentBoardState,
           colourToMove
         );
-
         setMoves((prevMoves) => [...prevMoves, addMove]);
-        // working on this
-        // setMoves((prevMoves) => [
-        //   ...prevMoves,
-        //   [
-        //     moveNumber,
-        //     endTile.piece,
-        //     [startTile.column, startTile.row],
-        //     hasPieceCaptured(endTile, currentBoardState, colourToMove)
-        //       ? [`x${endTile.column}`, endTile.row]
-        //       : [endTile.column, endTile.row],
-        //   ],
-        // ]);
-        // const newMoves = createMoveArray(
-        //   moveNumber,
-        //   movingPiece,
-        //   startTile,
-        //   endTile
-        // );
-        // setMoves((prevMoves) => [...prevMoves, newMoves]);
         playSound(endTile, currentBoardState, colourToMove);
         const newBoard = boardUpdate(
           startTile,
