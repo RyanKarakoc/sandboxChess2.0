@@ -8,7 +8,6 @@ const pairedMove = (moves) => {
       // if the index is odd, add the element to the last pair in the result array
       result[result.length - 1].push(element);
     }
-    console.log(result);
     return result; // return the result array for the next iteration
   }, []); // Initialize the result as an empty array
 };
