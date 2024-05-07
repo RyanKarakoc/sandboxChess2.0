@@ -27,6 +27,7 @@ import { pieceMovement } from "../../../../../utils/pieces/pieceMovement";
 import initialBoard from "../../../../../utils/board/initialBoard";
 import { boardUpdate } from "../../../../../utils/board/boardUpdate";
 import { playSound } from "../../../../../utils/playSound";
+import { createMoveArray } from "../../../../../utils/movement/createMoveArray";
 
 const Piece = ({ tile }) => {
   const renderPiece = () => {
@@ -59,7 +60,7 @@ const Piece = ({ tile }) => {
         return null;
     }
   };
-  return <div className={styles.piecePlacement()}>{renderPiece()}</div>;
+  return <div className={styles.piecePlacement}>{renderPiece()}</div>;
 };
 
 const Board = () => {
@@ -73,10 +74,11 @@ const Board = () => {
     moveNumber,
     setMoveNumber,
     colourToMove,
+    moves,
+    setMoves,
   } = useGlobalState();
   const [boardState, setBoardState] = useState(initialBoardState);
   const [movingPiece, setMovingPiece] = useState("");
-
   const [playMove, setPlayMove] = useState(false);
 
   // once endtile has been setup we can now check the movement
@@ -93,6 +95,35 @@ const Board = () => {
           colourToMove
         )
       ) {
+        const addMove = createMoveArray(
+          moveNumber,
+          movingPiece,
+          startTile,
+          endTile,
+          currentBoardState,
+          colourToMove
+        );
+
+        setMoves((prevMoves) => [...prevMoves, addMove]);
+        // working on this
+        // setMoves((prevMoves) => [
+        //   ...prevMoves,
+        //   [
+        //     moveNumber,
+        //     endTile.piece,
+        //     [startTile.column, startTile.row],
+        //     hasPieceCaptured(endTile, currentBoardState, colourToMove)
+        //       ? [`x${endTile.column}`, endTile.row]
+        //       : [endTile.column, endTile.row],
+        //   ],
+        // ]);
+        // const newMoves = createMoveArray(
+        //   moveNumber,
+        //   movingPiece,
+        //   startTile,
+        //   endTile
+        // );
+        // setMoves((prevMoves) => [...prevMoves, newMoves]);
         playSound(endTile, currentBoardState, colourToMove);
         const newBoard = boardUpdate(
           startTile,
@@ -108,16 +139,20 @@ const Board = () => {
   }, [playMove]);
 
   return (
-    <div className={styles.boardContainer()}>
-      <div className={styles.boardPadding()}>
-        <div className={styles.boardBorder()}>
+    <div className={styles.boardContainer}>
+      <div className={styles.boardPadding}>
+        <div className={styles.boardBorder}>
           {boardState.map((row, rowIndex) => (
-            <div key={rowIndex} className={styles.row()}>
+            <div key={rowIndex} className={styles.row}>
               {row.map((tile, colIndex) => (
                 // tile div
                 <div
                   key={`${colIndex}${rowIndex}`}
-                  className={styles.tile(rowIndex, colIndex)}
+                  className={
+                    (rowIndex + colIndex) % 2 === 0
+                      ? styles.lightTile
+                      : styles.darkTile
+                  }
                   // eventFunctions
                   onMouseDown={(e) => boardMouseDown(e, setStartTile, tile)}
                   onDragStart={(e) => boardDragStart(e, setMovingPiece, tile)}
@@ -129,13 +164,25 @@ const Board = () => {
                   {tile && <Piece type={tile.piece} tile={tile} />}
                   {/* Display Tile Column Letters */}
                   {tile.row === 1 ? (
-                    <div className={styles.rowText(rowIndex, colIndex)}>
+                    <div
+                      className={
+                        (rowIndex + colIndex) % 2 !== 0
+                          ? styles.rowText.darkTileText
+                          : styles.rowText.lightTileText
+                      }
+                    >
                       {tile.column}
                     </div>
                   ) : null}
                   {/* Display Tile Row Numbers */}
                   {tile.column === "a" ? (
-                    <div className={styles.columnText(rowIndex, colIndex)}>
+                    <div
+                      className={
+                        (rowIndex + colIndex) % 2 !== 0
+                          ? styles.columnText.darkTileText
+                          : styles.columnText.lightTileText
+                      }
+                    >
                       {tile.row}
                     </div>
                   ) : null}
