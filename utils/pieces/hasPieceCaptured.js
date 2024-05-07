@@ -6,6 +6,7 @@ const { whitePieces } = require("./whitePieces");
 const hasPieceCaptured = (endTile, currentBoardState, colourToMove) => {
   // Calculating the row index in the board state array
   const boardStateRow = endTile.row - boardOffset;
+
   // Finding the column index in the board state array using column reference
   const boardStateColumn = columnRef.indexOf(endTile.column);
 
