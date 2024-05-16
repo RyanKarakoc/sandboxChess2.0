@@ -6,7 +6,13 @@ const {
   loadCheckSound,
 } = require("./sounds/audioLoader");
 
-const playSound = (endTile, currentBoardState, colourToMove) => {
+const playSound = (
+  startTile,
+  endTile,
+  currentBoardState,
+  colourToMove,
+  previousMove
+) => {
   const moveSound = loadMoveSound();
   const captureSound = loadCaptureSound();
   const castleSound = loadCastleSound();
@@ -15,7 +21,15 @@ const playSound = (endTile, currentBoardState, colourToMove) => {
   let audio = new Audio(moveSound);
 
   // change the audio to capture sound
-  if (hasPieceCaptured(endTile, currentBoardState, colourToMove)) {
+  if (
+    hasPieceCaptured(
+      startTile,
+      endTile,
+      currentBoardState,
+      colourToMove,
+      previousMove
+    )
+  ) {
     audio = new Audio(captureSound);
   }
 
