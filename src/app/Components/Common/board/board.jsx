@@ -76,6 +76,7 @@ const Board = () => {
     colourToMove,
     moves,
     setMoves,
+    previousMove,
   } = useGlobalState();
   const [boardState, setBoardState] = useState(initialBoardState);
   const [movingPiece, setMovingPiece] = useState("");
@@ -92,7 +93,8 @@ const Board = () => {
           endTile,
           currentBoardState,
           movingPiece,
-          colourToMove
+          colourToMove,
+          previousMove
         )
       ) {
         const addMove = createMoveArray(
