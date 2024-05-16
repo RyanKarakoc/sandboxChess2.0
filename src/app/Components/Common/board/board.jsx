@@ -76,6 +76,7 @@ const Board = () => {
     colourToMove,
     moves,
     setMoves,
+    previousMove,
   } = useGlobalState();
   const [boardState, setBoardState] = useState(initialBoardState);
   const [movingPiece, setMovingPiece] = useState("");
@@ -92,7 +93,8 @@ const Board = () => {
           endTile,
           currentBoardState,
           movingPiece,
-          colourToMove
+          colourToMove,
+          previousMove
         )
       ) {
         const addMove = createMoveArray(
@@ -101,15 +103,24 @@ const Board = () => {
           startTile,
           endTile,
           currentBoardState,
-          colourToMove
+          colourToMove,
+          previousMove
         );
         setMoves((prevMoves) => [...prevMoves, addMove]);
-        playSound(endTile, currentBoardState, colourToMove);
+        playSound(
+          startTile,
+          endTile,
+          currentBoardState,
+          colourToMove,
+          previousMove
+        );
         const newBoard = boardUpdate(
           startTile,
           endTile,
           currentBoardState,
-          movingPiece
+          movingPiece,
+          colourToMove,
+          previousMove
         );
         newBoard.reverse();
         setBoardState(newBoard);

@@ -29,7 +29,8 @@ const pieceMovement = (
   endTile,
   currentBoardState,
   movingPiece,
-  colourToMove
+  colourToMove,
+  previousMove
 ) => {
   // movement variable for the piece selected
   const movements = pieceMovements[colourToMove];
@@ -48,7 +49,8 @@ const pieceMovement = (
     startTile,
     endTile,
     currentBoardState,
-    colourToMove
+    colourToMove,
+    previousMove
   );
 };
 

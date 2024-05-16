@@ -6,7 +6,8 @@ const createMoveArray = (
   startTile,
   endTile,
   currentBoardState,
-  colourToMove
+  colourToMove,
+  previousMove
 ) => {
   // Column of the startTile
   const startTileColumn = startTile.column;
@@ -14,9 +15,11 @@ const createMoveArray = (
   const startTilerow = startTile.row;
   // Checking if a piece has been captured at the end tile and formatting the column accordingly
   const endTileColumn = hasPieceCaptured(
+    startTile,
     endTile,
     currentBoardState,
-    colourToMove
+    colourToMove,
+    previousMove
   )
     ? `x${endTile.column}` // If piece has been captured add a "x"
     : endTile.column; // Otherwise, use the column letter directly

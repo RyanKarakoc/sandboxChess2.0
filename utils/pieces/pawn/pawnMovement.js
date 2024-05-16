@@ -2,9 +2,15 @@ const { columnRef } = require("../../columnRef");
 const { isMoveBlocked } = require("../../movement/isMoveBlocked");
 const { movingScope } = require("../../movement/movingScope");
 const { whitePieces } = require("../whitePieces");
+const { checkEnPassant } = require("./checkEnPassant");
 
-const pawnMovement = (startTile, endTile, currentBoardState, colourToMove) => {
-  console.log("insidePawnMovement");
+const pawnMovement = (
+  startTile,
+  endTile,
+  currentBoardState,
+  colourToMove,
+  previousMove
+) => {
   const xTilesMoved =
     columnRef.indexOf(endTile.column) - columnRef.indexOf(startTile.column);
   const yTilesMoved = endTile.row - startTile.row;
@@ -32,6 +38,14 @@ const pawnMovement = (startTile, endTile, currentBoardState, colourToMove) => {
   // variable for when moving forward pawns can be blocked
   const blockedFromMovingForward =
     tilesMovingOver[tilesMovingOver.length - 1].piece !== "";
+
+  // variable for checking if enPassant can occur
+  const enPassant = checkEnPassant(
+    startTile,
+    currentBoardState,
+    colourToMove,
+    previousMove
+  );
 
   // loop through the possible moves for pawn
   for (const move of pawnMoves) {
@@ -71,6 +85,9 @@ const pawnMovement = (startTile, endTile, currentBoardState, colourToMove) => {
       }
       // check start and end tiles match with capturing xNeg
       if (xNegYPos || xNegYNeg) {
+        if (enPassant) {
+          return true;
+        }
         if (
           move.x === xTilesMoved &&
           move.y === yTilesMoved &&
@@ -81,6 +98,9 @@ const pawnMovement = (startTile, endTile, currentBoardState, colourToMove) => {
       }
       // check start and end tiles match with capturing xPos
       if (xPosYPos || xPosYNeg) {
+        if (enPassant) {
+          return true;
+        }
         if (
           move.x === xTilesMoved &&
           move.y === yTilesMoved &&
