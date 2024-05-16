@@ -1,7 +1,5 @@
 const { pawnNextToPawn } = require("../../movement/pawnLandedNextToPawn");
 const { pawnMovedTwoTiles } = require("../../movement/pawnMovedTwoTiles");
-const { blackPieces } = require("../blackPieces");
-const { whitePieces } = require("../whitePieces");
 
 const checkEnPassant = (
   startTile,
@@ -9,10 +7,10 @@ const checkEnPassant = (
   colourToMove,
   previousMove
 ) => {
-  console.log(previousMove);
   // return false when first move of the game or castling
   if (
     previousMove === undefined ||
+    previousMove === null ||
     previousMove[0] === "O-O" ||
     previousMove[0] === "O-O-O"
   ) {
@@ -27,7 +25,6 @@ const checkEnPassant = (
   );
 
   if (pawnTwoTiles && hasPawnLandedNextToPawn) {
-    console.log("hello");
     return true;
   }
 
