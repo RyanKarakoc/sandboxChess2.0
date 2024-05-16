@@ -7,8 +7,6 @@ import { pairedMove } from "../../../../../utils/pairedMoves";
 const MoveList = () => {
   const { moves } = useGlobalState();
 
-  console.log(moves);
-
   // creates array with moves paired
   const pairedMoves = pairedMove(moves);
 
