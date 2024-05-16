@@ -103,15 +103,24 @@ const Board = () => {
           startTile,
           endTile,
           currentBoardState,
-          colourToMove
+          colourToMove,
+          previousMove
         );
         setMoves((prevMoves) => [...prevMoves, addMove]);
-        playSound(endTile, currentBoardState, colourToMove);
+        playSound(
+          startTile,
+          endTile,
+          currentBoardState,
+          colourToMove,
+          previousMove
+        );
         const newBoard = boardUpdate(
           startTile,
           endTile,
           currentBoardState,
-          movingPiece
+          movingPiece,
+          colourToMove,
+          previousMove
         );
         newBoard.reverse();
         setBoardState(newBoard);
