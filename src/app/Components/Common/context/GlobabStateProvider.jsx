@@ -12,6 +12,7 @@ export const GlobalStateProvider = ({ children }) => {
   const [moves, setMoves] = useState([]);
 
   const colourToMove = moveNumber % 2 === 0 ? "white" : "black";
+  const previousMove = moves[moves.length - 1] || null;
 
   return (
     <GlobalStateContext.Provider
@@ -25,6 +26,7 @@ export const GlobalStateProvider = ({ children }) => {
         colourToMove,
         moves,
         setMoves,
+        previousMove,
       }}
     >
       {children}
